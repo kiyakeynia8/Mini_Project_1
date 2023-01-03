@@ -10,7 +10,14 @@ Actor = []
 PRODUCTS = []
 
 def Advanced_search():
-    ...
+    user_input1 = input("enter time1: ")
+    user_input2 = input("enter time2: ")
+    for product in PRODUCTS:
+        if user_input1 <= product["duration"] <= user_input2:
+            print(product["code"],"\t\t",product["name"],"\t\t",product["director"],"\t\t",product["IMDB score"],"\t\t",product["url"],"\t\t",product["duration"],"\t\t",product["casts"],"\t\t")
+            break
+    else:
+        print("not found")
 
 def read_data():
     f = open("Assignment 12/tamrin/data.txt","r")
@@ -42,14 +49,17 @@ def Add():
     duration = input("enter duration: ")
     casts = input("enter casts: ")
 
-    new_product = {"code": code,"name":name,"director":director,"IMDB score":IMDBscore,"url":url,"duration":duration,"casts":casts8}
+    new_product = {"code": code,"name":name,"director":director,"IMDB score":IMDBscore,"url":url,"duration":duration,"casts":casts}
     PRODUCTS.append(new_product)
 
 def Edit():
     code = input("enter code: ")
     print("name")
-    print("price")
-    print("count")
+    print("director")
+    print("IMDB score")
+    print("url")
+    print("duration")
+    print("casts")
     user_input = input()
     new_product = input("input new product: ")
 
@@ -89,7 +99,7 @@ def Serch():
     user_input = input("type your keyword: ")
     for product in PRODUCTS:
         if product["code"] == user_input or product["name"] == user_input:
-            print(product["code"],"\t\t",product["name"],"\t\t",product["price"],"\t\t")
+            print(product["code"],"\t\t",product["name"],"\t\t",product["director"],"\t\t",product["IMDB score"],"\t\t",product["url"],"\t\t",product["duration"],"\t\t",product["casts"],"\t\t")
             break
     else:
         print("not found")
@@ -114,45 +124,13 @@ def write_to_date():
         p.write(f"{e}\n")
 
     p.close()
-def Buy():
-    s = []
-    p = []
-    while True:
-        print("1 = stay, 2 = exit")
-        user_input = int(input())
-        if user_input == 1:
-            user_input = input("code: ")
-            for product in PRODUCTS:
-                if product["code"] == user_input:
-                    count = int(input("enter count: "))
-                    if int(product["count"]) >= count:
-                        s.append(count)
-                        b = int(product["price"])*count
-                        p.append(b)
-                        product["count"] = int(product["count"]) - count
-                        o = product["name"]
-                        l = product["price"]
-                        k = count
-                        m = o,l,k,b
-                        Cart.append(m)
-                        break
-                    else:
-                        print("Insufficient inventory")
-            else:
-                print("not found")
-        if user_input == 2:
-            for product in Cart:
-                print(product)
-            print("sum count = ",sum(s))
-            print("sum price = ",sum(p))
-            break
 
 title = pyfiglet.figlet_format("welcome to my store", font="slant")
 print(title)
 print("loding...")
 read_data()
 print("Date loaded.")
-
+print(PRODUCTS)
 
 while True:
 
@@ -170,8 +148,8 @@ while True:
         Serch()
     elif choice == 5:
         Show_list()
-    elif Advanced_search == 6:
-        Buy()
+    elif choice == 6:
+        Advanced_search()
     elif choice == 7:
         QR_code()
     elif choice == 8:
