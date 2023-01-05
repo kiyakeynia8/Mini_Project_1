@@ -4,31 +4,94 @@ from Film import Film
 from Series import Series
 from Documentary import Documentary
 from Clip import Clip
-from Actor import Actor
+from Mediaa import Mediaa
 
-Actor = []
-PRODUCTS = []
 
-def Advanced_search():
-    user_input1 = input("enter time1: ")
-    user_input2 = input("enter time2: ")
-    for product in PRODUCTS:
-        if user_input1 <= product["duration"] <= user_input2:
-            print(product["code"],"\t\t",product["name"],"\t\t",product["director"],"\t\t",product["IMDB score"],"\t\t",product["url"],"\t\t",product["duration"],"\t\t",product["casts"],"\t\t")
-            break
-    else:
-        print("not found")
+MEDIAS = []
 
-def read_data():
-    f = open("Assignment 12/tamrin/data.txt","r")
+class Media:
+    def __init__(self, c, n, dir, imdb, u, dur, cas):
+        self.code = c
+        self.name = n
+        self.director = dir
+        self.IMDBscore = imdb
+        self.url = u
+        self.duration = dur
+        self.casts = cas
 
-    for line in f:
-        result = line.split(",")
-        my_dict = {"code": result[0],"name": result[1],"director": result[2], "IMDB score": result[3], "url": result[4], "duration": result[5], "casts": result[6]}
+    @staticmethod
+    def Advanced_search():
+        print(media.code,"\t\t",media.name,"\t\t",media.director,"\t\t",media.IMDBscore,"\t\t",media.url,"\t\t",media.duration,"\t\t",media.casts,"\t\t",media.N_o_episodes,"\t\t",media.Year_of_construction,"\t\t",media.location,"\t\t",medi.date,"\t\t")
+        
+    def Add():
+        code = input("enter code: ")
+        name = input("enter name: ")
+        director = input("enter director: ")
+        IMDBscore = input("enter IMDB score: ")
+        url = input("enter url: ")
+        duration = input("enter duration: ")
+        casts = input("enter casts: ")
+        N_o_episodes = input("enter N_o_episodes: ")
+        Year_of_construction= input("enter Year_of_construction: ")
+        location = input("enter location: ")
+        date = input("enter date: ")
 
-        PRODUCTS.append(my_dict)
+        new_media = Media(code,name,director,IMDBscore,url,duration,casts,N_o_episodesYear_of_construction,location,date)
+        MEDIAS.append(new_media)
+
+    def Edit():
+        print("name")
+        print("director")
+        print("IMDB score")
+        print("url")
+        print("duration")
+        print("casts")
+        print("N_o_episodes")
+        print("Year_of_construction")
+        print("location")
+        print("date")
+        user_input = input()
+        new_media = input("input new product: ")
+
+        media.user_input = new_media
+        print("Information updated successfully!!")
+
+    def Remove():
+        del MEDIAS[a-1]
+        print("Information Delete successfully!!")
+
+    @staticmethod
+    def Serch():
+        user_input = input("type your keyword: ")
+        for media in MEDIAS:
+            if media.code == user_input or media.name == user_input:
+                print(media.code,"\t\t",media.name,"\t\t",media.director,"\t\t",media.IMDBscore,"\t\t",media.url,"\t\t",media.duration,"\t\t",media.casts,"\t\t",media.N_o_episodes,"\t\t",media.Year_of_construction,"\t\t",media.location,"\t\t",medi.date,"\t\t")
+                break
+        else:
+            print("not found")
+        
+    @staticmethod
+    def Show_list():
+        print("code\t\t\tname\t\t\tdirector\t\tIMDB score\t\t\turl\t\t\t\tduration\t\t\tcasts\t\t\t")
+        for media in MEDIAS:
+            print(media.code,"\t\t",media.name,"\t\t",media.director,"\t\t",media.IMDBscore,"\t\t",media.url,"\t\t",media.duration,"\t\t",media.casts,"\t\t",media.N_o_episodes,"\t\t",media.Year_of_construction,"\t\t",media.location,"\t\t",medi.date,"\t\t")
     
-    f.close()
+    def write_to_date():
+        p = open("Assignment 12/tamrin/data.txt","w")
+
+        for media in MEDIAS:
+            m = media.code
+            o = media.name
+            l = media.director
+            k = media.IMDBscore
+            u = media.url
+            g = media.duration
+            j = media.casts
+            e = m,o,l,k,u,g,j
+
+            p.write(f"{e}\n")
+
+        p.close()
 
 def show_menu():
     print("1 = Add")
@@ -39,98 +102,45 @@ def show_menu():
     print("6 = Advanced_search")
     print("7 = QR_code")
     print("8 = Exit")
-    
-def Add():
-    code = input("enter code: ")
-    name = input("enter name: ")
-    director = input("enter director: ")
-    IMDBscore = input("enter IMDB score: ")
-    url = input("enter url: ")
-    duration = input("enter duration: ")
-    casts = input("enter casts: ")
 
-    new_product = {"code": code,"name":name,"director":director,"IMDB score":IMDBscore,"url":url,"duration":duration,"casts":casts}
-    PRODUCTS.append(new_product)
+def read_data():
+    f = open("Assignment 12/tamrin/data.txt","r")
 
-def Edit():
-    code = input("enter code: ")
-    print("name")
-    print("director")
-    print("IMDB score")
-    print("url")
-    print("duration")
-    print("casts")
-    user_input = input()
-    new_product = input("input new product: ")
+    for line in f:
+        result = line.split(",")
 
-    for product in PRODUCTS:
-        if product["code"] == code:
-            product[user_input] = new_product
-            print("Information updated successfully!!")
-            break
-    else:
-        print("not found")
-    print(product)
+        if result[7] != "...":
+            my_obj = Film(result[0], result[1], result[2], result[3], result[4], result[5], result[6], result[7], result[8], result[9], result[10])
 
-def Remove():
-    a = 0
-    code = input("enter code: ")
-    for product in PRODUCTS:
-        a = a + 1
-        if product["code"] == code:
-            del PRODUCTS[a-1]
-            print("Information Delete successfully!!")
-            break
-    else:
-        print("not found")
-    
+        if result[8] != "...":
+            my_obj = Series(result[0], result[1], result[2], result[3], result[4], result[5], result[6], result[7], result[8], result[9], result[10])
+
+        if result[9] and result[10] != "...":
+            my_obj = Documentary(result[0], result[1], result[2], result[3], result[4], result[5], result[6], result[7], result[8], result[9], result[10])
+        
+        if result[5] < 5:
+            my_obj = Clip(result[0], result[1], result[2], result[3], result[4], result[5], result[6], result[7], result[8], result[9], result[10])
+       
+        MEDIAS.append(my_obj)
+
+    f.close()
+
 def QR_code():
     code = input("enter code: ")
-    for product in PRODUCTS:
-        if product["code"] == code:
-            img = qrcode.make(product)
+    for media in MEDIAS:
+        if media.code == code:
+            img = qrcode.make(media)
             img.save("product_QR_code.png")
             break
     else:
         print("not found")
+        
 
-
-def Serch():
-    user_input = input("type your keyword: ")
-    for product in PRODUCTS:
-        if product["code"] == user_input or product["name"] == user_input:
-            print(product["code"],"\t\t",product["name"],"\t\t",product["director"],"\t\t",product["IMDB score"],"\t\t",product["url"],"\t\t",product["duration"],"\t\t",product["casts"],"\t\t")
-            break
-    else:
-        print("not found")
-    
-def Show_list():
-    print("code\t\t\tname\t\t\tdirector\t\tIMDB score\t\t\turl\t\t\t\tduration\t\t\tcasts\t\t\t")
-    for product in PRODUCTS:
-        print(product["code"],"\t\t",product["name"],"\t\t",product["director"],"\t\t",product["IMDB score"],"\t\t",product["url"],"\t\t",product["duration"],"\t\t",product["casts"],"\t\t")
-def write_to_date():
-    p = open("Assignment 12/tamrin/data.txt","w")
-
-    for product in PRODUCTS:
-        m = product["code"]
-        o = product["name"]
-        l = product["director"]
-        k = product["IMDB score"]
-        u = product["url"]
-        g = product["duration"]
-        j = product["casts"]
-        e = m,o,l,k,u,g,j
-
-        p.write(f"{e}\n")
-
-    p.close()
-
-title = pyfiglet.figlet_format("welcome to my store", font="slant")
+title = pyfiglet.figlet_format("welcome to my Media management", font="slant")
 print(title)
 print("loding...")
 read_data()
 print("Date loaded.")
-print(PRODUCTS)
 
 while True:
 
@@ -139,21 +149,50 @@ while True:
     choice = int(input("enter your choice: "))
 
     if choice == 1:
-        Add()
+        Media.Add()
+
     elif choice == 2:
-        Edit()
+        code = input("enter code: ")
+        for media in MEDIAS:
+            if media.code == code:
+                Media.Edit()
+                break
+        else:
+            print("not found")
+
     elif choice == 3:
-        Remove()
+        a = 0
+        code = input("enter code: ")
+        for media in MEDIAS:
+            a = a + 1
+            if media.code == code:
+                Media.Remove()
+                break
+        else:
+            print("not found")
+
     elif choice == 4:
-        Serch()
+        PrMediaoduct.Serch()
+
     elif choice == 5:
-        Show_list()
+        Media.Show_list()
+
     elif choice == 6:
-        Advanced_search()
+        user_input1 = int(input("enter time1: "))
+        user_input2 = int(input("enter time2: "))
+        for media in MEDIAS:
+            if user_input1 <= int(media.duration) <= user_input2:
+                media.Advanced_search()
+                break
+        else:
+            print("not found")
+
     elif choice == 7:
         QR_code()
+
     elif choice == 8:
-        write_to_date()
+        Media.write_to_date()
         exit(0)
+
     else:
         print("dorost vared kon")
