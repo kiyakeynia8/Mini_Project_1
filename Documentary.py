@@ -2,10 +2,12 @@ from Mediaa import Mediaa
 
 class Documentary(Mediaa):
     def __init__(self,location,date):
+        super().__init__(self,c,n,d,i_s,u,dura,c)
         self.location = location
         self.date = date
 
     def show_info():
+        print(self.code)
         print(self.name)
         print(self.director)
         print(self.IMDBscore)

@@ -2,9 +2,10 @@ from Mediaa import Mediaa
 
 class Clip(Mediaa):
     def __init__(self,N_o_e):
-        super().__init__()
+        super().__init__(self,c,n,d,i_s,u,dura,c)
         
     def show_info():
+        print(self.code)
         print(self.name)
         print(self.director)
         print(self.IMDBscore)
