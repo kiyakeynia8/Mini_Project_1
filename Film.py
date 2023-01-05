@@ -1,8 +1,8 @@
 from Mediaa import Mediaa
 
 class Film(Mediaa):
-    def __init__(self,Y_of_c):
-        super().__init__(self,c,n,d,i_s,u,dura,c)
+    def __init__(self,co,n,d,i_s,u,dura,c,N_o_episodes,Year_of_construction,location,date):
+        super().__init__(co,n,d,i_s,u,dura,c)
         self.Y_of_c = Year_of_construction
         
     def show_info():

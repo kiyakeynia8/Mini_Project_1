@@ -32,12 +32,23 @@ class Media:
         duration = input("enter duration: ")
         casts = input("enter casts: ")
         N_o_episodes = input("enter N_o_episodes: ")
-        Year_of_construction= input("enter Year_of_construction: ")
+        Year_of_construction = input("enter Year_of_construction: ")
         location = input("enter location: ")
         date = input("enter date: ")
 
-        new_media = Media(code,name,director,IMDBscore,url,duration,casts,N_o_episodesYear_of_construction,location,date)
-        MEDIAS.append(new_media)
+        if Year_of_construction != "...":
+            my_obj = Film(code,name,director,IMDBscore,url,duration,casts,N_o_episodes,Year_of_construction,location,date)
+
+        if  N_o_episodes != "...":
+            my_obj = Series(code,name,director,IMDBscore,url,duration,casts,N_o_episodes,Year_of_construction,location,date)
+
+        if location != "..." and date != "...":
+            my_obj = Documentary(code,name,director,IMDBscore,url,duration,casts,N_o_episodes,Year_of_construction,location,date)
+
+        else:
+            my_obj = Clip(code,name,director,IMDBscore,url,duration,casts,N_o_episodes,Year_of_construction,location,date)
+        
+        MEDIAS.append(my_obj)
 
     def Edit():
         print("name")
@@ -109,16 +120,16 @@ def read_data():
     for line in f:
         result = line.split(",")
 
-        if result[7] != "...":
+        if result[8] != "...":
             my_obj = Film(result[0], result[1], result[2], result[3], result[4], result[5], result[6], result[7], result[8], result[9], result[10])
 
-        if result[8] != "...":
+        if result[7] != "...":
             my_obj = Series(result[0], result[1], result[2], result[3], result[4], result[5], result[6], result[7], result[8], result[9], result[10])
 
-        if result[9] and result[10] != "...":
+        if result[9] != "..." and result[10] != "...":
             my_obj = Documentary(result[0], result[1], result[2], result[3], result[4], result[5], result[6], result[7], result[8], result[9], result[10])
         
-        if result[5] < 5:
+        else:
             my_obj = Clip(result[0], result[1], result[2], result[3], result[4], result[5], result[6], result[7], result[8], result[9], result[10])
        
         MEDIAS.append(my_obj)
@@ -154,7 +165,7 @@ while True:
     elif choice == 2:
         code = input("enter code: ")
         for media in MEDIAS:
-            if media.code == code:
+            if int(media.code) == code:
                 Media.Edit()
                 break
         else:

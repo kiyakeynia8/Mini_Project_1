@@ -1,8 +1,8 @@
 from Mediaa import Mediaa
 
 class Series(Mediaa):
-    def __init__(self,N_o_e):
-        super().__init__(self,c,n,d,i_s,u,dura,c)
+    def __init__(self,co,n,d,i_s,u,dura,c,N_o_episodes,Year_of_construction,location,date):
+        super().__init__(c,n,d,i_s,u,dura,c)
         self.N_o_e = N_o_episodes
         
     def show_info():
